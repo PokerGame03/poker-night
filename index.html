@@ -370,7 +370,7 @@ hhrm(i){smenu=null;if(!S.hhc){R();return}S.hhc.ids=S.hhc.ids.filter(x=>x!=i);if(
 // ---- Spoken announcements (this device) ----
 // Beeps play first, then the voice, then the device's own sound for that event (for example a song you own).
 // Settings and sounds stay on this device: they are not in backups, game files or the website.
-const EV=[["seat","Seat changes","Seat change. Bob Sussey, move to table 2, seat 5."],["warn","1-minute warning","One minute. Blinds go up to 200, 400."],["level","Blinds up and breaks","Blinds are now 300, 500."],["ko","Knockouts","Ricardo is out in 8th place, knocked out by Dave D."],["money","In the money","We're in the money! Everyone left gets paid."],["final","Final table","We're at the final table!"],["hh","High hand","New high hand! Bob Sussey, full house, kings over 4s."],["win","Winner and splits","Bob Sussey wins!"],["hhend","High hand of the night","The high hand of the night goes to Bob Sussey, 48 dollars."]];
+const EV=[["seat","Seat changes","Seat change. Bob Sussey, move to table 2, seat 5."],["warn","1-minute warning","One minute. Blinds go up to 200, 400."],["level","Blinds up and breaks","Blinds are now 300, 500."],["ko","Knockouts","Ricardo is out in 8th place, knocked out by Dave D."],["money","In the money","Six players left. Everyone here gets paid."],["final","Final table","We're at the final table!"],["hh","High hand","New high hand! Bob Sussey, full house, kings over 4s."],["win","Winner and splits","Bob Sussey wins!"],["hhend","High hand of the night","The high hand of the night goes to Bob Sussey, 48 dollars."]];
 const SAID=[],SQ=[];let sqRun=false,VOX=[];
 const annCfg=()=>{let c=null;try{c=JSON.parse(lsGet("pm2-ann")||"null")}catch(e){}return Object.assign({on:true,voice:"",ev:{},snd:{}},c||{})},annSet=c=>lsSet("pm2-ann",JSON.stringify(c));
 const voices=()=>{try{const v=window.speechSynthesis?speechSynthesis.getVoices():[];return v.filter(x=>/^en/i.test(x.lang)).concat(v.filter(x=>!/^en/i.test(x.lang)&&false))}catch(e){return[]}};
@@ -383,13 +383,13 @@ try{const ss=window.speechSynthesis;if(!ss)return next();const u=new SpeechSynth
 // Your own sound plays after the voice; the next announcement waits up to 20 seconds, then talks over it.
 function playOwn(ev){if(!annCfg().snd[ev])return Promise.resolve();return SNDS.get(ev).then(b=>new Promise(res=>{if(!b)return res();try{const a=AU||new Audio();if(a._u)URL.revokeObjectURL(a._u);a._u=URL.createObjectURL(b);a.src=a._u;a.onended=res;a.play().catch(res);setTimeout(res,20000)}catch(e){res()}}))}
 function annLevel(){const L=bl(),b=L[Math.min(S.level,L.length-1)];b[0]?say("level",`Blinds are now ${b[0]}, ${b[1]}${C.useAnte&&b[2]?", ante "+b[2]:""}.`,900):say("level",`Break time. ${b[4]}. ${b[3]} minutes.`,900)}
-function annWarn(){const n=bl()[S.level+1];say("warn",!n?"One minute left in this level.":n[0]?`One minute. Blinds go up to ${n[0]}, ${n[1]}.`:"One minute until the break.",2600)}
+function annWarn(){const n=bl()[S.level+1];say("warn",!n?"One minute left in this level.":n[0]?`One minute. Blinds go up to ${n[0]}, ${n[1]}.`:`Break in one minute. ${n[4]}.`,2600)}
 const seatText=m=>{const x=/^(.*): T(\d+) → T(\d+) seat (\d+)$/.exec(m),y=/^Swapped (.*) and (.*)$/.exec(m);return x?`Seat change. ${x[1]}, move to table ${x[3]}, seat ${x[4]}.`:y?`Seat change. ${y[1]} and ${y[2]} swap seats.`:""};
 function annMoves(){S.moves.map(seatText).filter(Boolean).forEach(t=>say("seat",t))}
 function annBust(p,by,before){const a=act().length,k=by?nm(by):"";say("ko",`${p.name} is out in ${ordn(p.place)} place${k?", knocked out by "+k:""}.`,1300);
 if(a==1){say("win",`${act()[0].name} wins!`);return}annMoves();
 if(Math.ceil(before/C.size)>1&&Math.ceil(a/C.size)==1)say("final","We're at the final table!");
-if(before>amts().length&&a==amts().length)say("money","We're in the money! Everyone left gets paid.")}
+if(before>amts().length&&a==amts().length)say("money",`${a} players left. Everyone here gets paid.`)}
 const dollars=x=>{const r=Math.round(x*100)/100;return(r%1?r.toFixed(2):r)+" dollars"};
 function vAnn(){const a=annCfg(),vs=voices();return `<div class="c"><h3>🔊 Announcements <span class="mu">· this device</span></h3>
 <div class="row" style="flex-wrap:wrap"><button class="b ${a.on?"":"s"} x" data-a="annon">🗣 Spoken announcements: ${a.on?"On":"Off"}</button>${vs.length?`<select id="annv" style="width:auto;max-width:240px"><option value="">Device's default voice</option>${vs.map(v=>`<option ${v.name==a.voice?"selected":""}>${esc(v.name)}</option>`).join("")}</select>`:""}</div>
@@ -514,9 +514,9 @@ ok("End of night: the high hand step is filled in from tonight's holder, and the
 // Spoken announcements
 {const said=()=>SAID.map(x=>x[1]).join(" | ");reset({size:8});mk(9);doBust(P()[0].id,P()[1].id);const s1=said();
 ok("Announces the knockout, seat changes and the final table",/P1 is out in 9th place, knocked out by P2\./.test(s1)&&/Seat change\. .*move to table 1, seat \d\./.test(s1)&&/final table/.test(s1),s1);
-P().slice(2,7).forEach(p=>doBust(p.id,null));ok("Announces when the game reaches the money",/We're in the money/.test(said()));
+P().slice(2,7).forEach(p=>doBust(p.id,null));ok("Announces when the game reaches the money",/3 players left\. Everyone here gets paid\./.test(said()),said());
 SAID.length=0;S.run=true;S.level=0;S.endAt=Date.now()+59000;S.left=61;tick();S.endAt=Date.now()-500;tick();const s2=said();S.level=2;S.left=61;S.endAt=Date.now()+59000;tick();
-ok("Announces the 1-minute warning, new blinds and the coming break",/One minute\. Blinds go up to 200, 400\./.test(s2)&&/Blinds are now 200, 400\./.test(s2)&&/One minute until the break\./.test(said()),said());
+ok("Announces the 1-minute warning, new blinds and the coming break",/One minute\. Blinds go up to 200, 400\./.test(s2)&&/Blinds are now 200, 400\./.test(s2)&&/Break in one minute\. Chip color up\./.test(said()),said());
 SAID.length=0;annSet(Object.assign(annCfg(),{ev:{ko:false}}));doBust(P()[7].id,null);const offOne=!said().includes("is out");annSet(Object.assign(annCfg(),{on:false}));say("seat","x");SY.role="watch";annSet(Object.assign(annCfg(),{on:true}));say("seat","y");SY.role="local";
 ok("Each announcement can be turned off; the master switch turns them all off; watching phones stay quiet",offOne&&!said().includes("x")&&!said().includes("y"))}
 reset();await addSound("final",new File(["fake audio"],"rocky.mp3",{type:"audio/mpeg"}));{const got=await SNDS.get("final");
