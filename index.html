@@ -317,7 +317,7 @@ if(!j||j.app!="poker-night-manager"){tell("That isn't a Poker Night file.");retu
 if(j.kind=="backup"){tell("That's a full backup. Use Restore on the Stats tab to load it.");return}
 if(j.kind=="start"){if(!j.start||!j.start.cfg){tell("That starting file is damaged.");return}ask(`Use "${j.name||fn}" as your starting file and start a new game?`,()=>{S.tpl=JSON.parse(JSON.stringify(j.start));save();gsh={mode:"new",name:defName()};R()});return}
 if(j.kind!="game"||!j.game||!Array.isArray(j.game.players)||typeof j.game.cfg!="object"){tell("That isn't a Poker Night game file.");return}
-const nm=safeName(j.name||fn),go=()=>{applyGame(j.game);S.fname=nm;S.fsig=gsig();S.fsaved=Date.parse(j.savedAt)||Date.now();gfh=h||null;S.tab="p";save();R();tell(`Opened "${nm}". The clock is paused: tap Start when you're ready.`)};
+const nm=safeName(fn||j.name),go=()=>{applyGame(j.game);S.fname=nm;S.fsig=gsig();S.fsaved=Date.parse(j.savedAt)||Date.now();gfh=h||null;S.tab="p";save();R();tell(`Opened "${nm}". The clock is paused: tap Start when you're ready.`)};
 gdirty()?ask(`Open "${nm}"? The current game has changes that aren't saved to a file.`,go):go()}
 function vFiles(){const d=gdirty(),t=tplOf(),c=t.cfg;
 return `<div class="c"><div class="row"><h3 style="flex:1;margin:0;min-width:0">📁 ${S.fname?esc(S.fname):"Game not saved to a file yet"}</h3>${S.fname?`<span class="tag" style="${d?"background:var(--rd);color:#fff":""}">${d?"Not saved":"Saved "+when(S.fsaved)}</span>`:""}</div>
@@ -438,6 +438,7 @@ await A.gsaveas();await wait();ok("Save as… opens the box again for a new name
 reset();mk(7);S.run=true;S.endAt=Date.now()+300000;disk["Old Game.json"]=fileText("game","Old Game",{game:gameObj()});reset();mk(2);S.fname="Current";S.fsig="x";
 nextOpen="Old Game.json";await A.gopen();await wait();const asked=!!(dlg&&/Open "Old Game"/.test(dlg.m));A.yes();
 ok("Open… loads a saved game, asks first if the current game isn't saved, and pauses the clock",asked&&P().length==7&&!S.run&&S.fname=="Old Game"&&!gdirty(),dlg?dlg.m:"");dlg=null;
+reset();{const t=fileText("game","2026-10-08 Poker Night",{game:gameObj()});reset();loadFileText(t,null,"2026-00-00 Poker Night Default.json");ok("Open… shows the file's own name, even if it was renamed when saving",S.fname=="2026-00-00 Poker Night Default",S.fname);dlg=null}
 reset();disk["Start.json"]=fileText("start","Poker Night - Starting File",{start:{cfg:Object.assign(JSON.parse(JSON.stringify(D.cfg)),{buyin:50}),roster:["Cy D"],dk:true,dh:true}});nextOpen="Start.json";await A.gopen();await wait();A.yes();
 ok("Opening a starting file makes it the starting file and offers a new game",!!S.tpl&&S.tpl.cfg.buyin==50&&!!gsh&&gsh.mode=="new");gsh=null;dlg=null;
 {const res=[[fileText("backup","b",{data:{}}),/full backup/],["not json",/can't be read/],[JSON.stringify({a:1}),/isn't a Poker Night file/]].map(([t,re])=>{dlg=null;loadFileText(t,null,"x.json");return!!(dlg&&re.test(dlg.m))});dlg=null;
