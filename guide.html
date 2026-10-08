@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Poker Night Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a short "night in order" strip up top, then reference cards in two columns (one on phones). Felt green + chip red, like the app. */
+:root{--bg:#f3f4ef;--card:#ffffff;--fg:#18211c;--mu:#5d6a61;--felt:#0f6b46;--felt2:#e3f1e9;--chip:#a3162e;--line:#d9ded6;
+--disp:"Oswald","Arial Narrow",Arial,sans-serif;--body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111613;--card:#19211c;--fg:#e9efea;--mu:#9aa79e;--felt:#45c08a;--felt2:#1d3528;--chip:#ff7b8c;--line:#2b362f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111613;--card:#19211c;--fg:#e9efea;--mu:#9aa79e;--felt:#45c08a;--felt2:#1d3528;--chip:#ff7b8c;--line:#2b362f;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.5 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px}
+h1,h2{font-family:var(--disp);font-weight:600;letter-spacing:.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.05}
+h1 span{color:var(--chip)}
+.lede{color:var(--mu);margin:8px 0 0;max-width:62ch}
+.eyebrow{font:600 13px var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--felt)}
+.night{margin-top:22px;background:var(--felt);color:#fff;border-radius:14px;padding:16px}
+.night h2{font-size:20px;color:#fff}
+.night ol{margin:10px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;counter-reset:s}
+.night li{counter-increment:s;background:rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.35}
+.night li::before{content:counter(s);display:block;font:600 22px var(--disp);color:#ffd27a}
+.night b{color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px;margin-top:18px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+section h2{font-size:21px;color:var(--felt);margin-bottom:6px}
+section p{margin:6px 0}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.k{display:inline-block;font-weight:700;font-size:14px;background:var(--felt2);color:var(--felt);border-radius:6px;padding:0 6px;white-space:nowrap}
+.note{border-left:4px solid var(--chip);padding:6px 10px;background:var(--felt2);border-radius:0 8px 8px 0;margin:8px 0;font-size:15px}
+.mu{color:var(--mu);font-size:15px}
+footer{margin-top:22px;color:var(--mu);font-size:14px}
+@media print{body{background:#fff;color:#000;font-size:12.5px}.wrap{padding:0}section,.night{break-inside:avoid}.night{background:#fff;color:#000;border:2px solid #0f6b46}.night h2,.night b{color:#000}.night li{background:#f2f2f2}}
+</style></head><body><div class="wrap">
+
+<div class="eyebrow">How to use</div>
+<h1>Poker Night <span>Manager</span> Guide</h1>
+<p class="lede">Everything you need to run the game from your iPad, iPhone or PC. Buttons are shown <span class="k">like this</span>.</p>
+
+<div class="night"><h2>A game night, in order</h2><ol>
+<li><b>Open the app</b> from the home-screen icon (iPad/iPhone) or the chip on your PC desktop.</li>
+<li><b>Set the game</b> on <span class="k">Pool</span>: Standard or High stakes, rebuys on or off.</li>
+<li><b>Sign players in</b> on <span class="k">Players</span>. Seats are drawn for you.</li>
+<li><b>Start the clock</b> on <span class="k">Clock + Seats</span>. Tap <span class="k">📺 TV</span> for the big screen.</li>
+<li><b>Knockouts</b>: tap <span class="k">Out</span>, then who knocked them out.</li>
+<li><b>End of night</b>: tap <span class="k">End of night: pay out &amp; save</span> and follow the 5 steps.</li>
+<li><b>Back up</b> on <span class="k">Stats</span>. Do this after every game.</li>
+</ol></div>
+
+<div class="grid">
+
+<section><h2>Before the game</h2>
+<ul>
+<li><span class="k">Pool</span> → <span class="k">Standard</span> ($20 / $5 bounty / $2 high hand) or <span class="k">High stakes</span> ($100 / $20 / $5).</li>
+<li>Settings below that: rebuys on/off, rebuy price, starting chips (8,500), minutes per level, payout table and blinds. Every number can be changed.</li>
+<li>Rebuys stay open through level 6 (1000/2000). The break counts as level 4.</li>
+</ul></section>
+
+<section><h2>Signing players in</h2>
+<ul>
+<li>On <span class="k">Players</span>, tap a name, or type a new one and tap <span class="k">Add</span>.</li>
+<li>The two buttons under the name box set what new players join with: <span class="k">Bounty chip $5</span> and <span class="k">High hand $2</span>. Turn one off before tapping names to sign people in without it.</li>
+<li>Change one player later with the buttons under their name.</li>
+<li>Use full last names so the yearly stats keep each person separate.</li>
+</ul></section>
+
+<section><h2>The clock</h2>
+<ul>
+<li><span class="k">▶ Start</span> / <span class="k">⏸ Pause</span>, <span class="k">◀ Level</span> / <span class="k">Level ▶</span>, and <span class="k">−1 min</span> / <span class="k">+1 min</span>.</li>
+<li>Alarms: a siren at 1:00 left (the screen turns red), a buzzer on every knockout, a chime when blinds go up. Use the test buttons to check your volume.</li>
+<li>The last level keeps repeating its alarms until the game ends.</li>
+</ul>
+<p class="note">Sound only works after you've tapped the screen once. If the screen goes dark, set <b>Settings → Display &amp; Brightness → Auto-Lock → Never</b>.</p></section>
+
+<section><h2>Knockouts and rebuys</h2>
+<ul>
+<li>Tap <span class="k">Out</span> next to the player, then tap who knocked them out (or <span class="k">Nobody / unknown</span>). Places and bounty chips update by themselves.</li>
+<li>A mistake? Tap <span class="k">Undo</span> on that player.</li>
+<li><span class="k">↺ Rebuy</span> appears only for players who are out. They go back to their own seat and can buy a new bounty or high-hand chip at the same time. Their finishing place is freed up.</li>
+</ul></section>
+
+<section><h2>Bounty chips</h2>
+<ul>
+<li>A chip changes hands only when both players are in the bounty bet. A knocked-out player loses 1 chip, never more.</li>
+<li>B next to a name shows chips held: B = 1, B3 = 3, B0 = none.</li>
+<li>To pay out extra chips early, tap <span class="k">💵 Pay 2 extra chips</span>. The player keeps 1. <span class="k">↩ undo payout</span> fixes a wrong tap.</li>
+<li>A player who rebuys without buying a new chip is out of the bounty bet.</li>
+</ul></section>
+
+<section><h2>Tables and seats</h2>
+<ul>
+<li>Tables balance by themselves after every knockout. Moves are listed as <b>Seat changes</b> on the Clock + Seats and TV screens.</li>
+<li><span class="k">Tables</span>: tap a player, then tap another to swap them, or tap <span class="k">Move here</span> on a table. <span class="k">Random redraw</span> reseats everyone.</li>
+</ul></section>
+
+<section><h2>TV screen</h2>
+<ul>
+<li>Tap <span class="k">📺 TV</span> at the top. You get a big clock, blinds, payouts and every table, sized to fit the screen.</li>
+<li>Smart TV or HDMI: open the app on that device and tap TV. iPad: AirPlay or a cable shows the iPad's screen.</li>
+<li>Leave with <span class="k">✕ Exit TV</span> in the bottom-right corner.</li>
+</ul>
+<p class="note">AirPlay copies the iPad's whole screen. While the TV is showing, use your iPhone to run the game, or exit TV mode for a moment.</p></section>
+
+<section><h2>Side bets and high hand</h2>
+<ul>
+<li><span class="k">Extras</span> → Side bets: pick who beat whom and the amount. Net totals show underneath and are saved with the game.</li>
+<li>The high-hand pot builds as people sign in. It's paid once, at the end of the night. A tie can be split.</li>
+</ul></section>
+
+<section><h2>End of night (5 steps)</h2>
+<ol>
+<li><b>High hand</b>: tap the winner (tap two or more to split) and type the hand. Required.</li>
+<li><b>Bounties</b>: check each player's chip count and cash value. Fix a count with − / +.</li>
+<li><b>Places</b>: 1st, 2nd, 3rd… with prize money, from the knockout order.</li>
+<li><b>Side bets</b>: the night's bets and each player's net.</li>
+<li><b>Summary</b>: paid, prize, bounty, high hand and net for everyone. Tap <span class="k">Save game</span>.</li>
+</ol></section>
+
+<section><h2>Game files</h2>
+<p>Each game night can be its own named file in a folder, for example <b>2026-10-14 Poker Night.json</b>. The buttons are at the top of <span class="k">Players</span>.</p>
+<ul>
+<li><span class="k">＋ New game</span>: starts a fresh game from your <b>starting file</b> (fees, blinds, payouts and name list), asks for a file name, then saves it. Saved games and stats are kept.</li>
+<li><span class="k">💾 Save</span> saves to the same file. <span class="k">Save as…</span> saves under a new name or in a new folder.</li>
+<li><span class="k">📂 Open…</span> loads a saved game. The clock opens paused.</li>
+<li>The card shows the file's name and <b>Saved</b> or <b>Not saved</b>.</li>
+<li>Starting file: open the <b>Starting file</b> line on that card. <span class="k">Use current settings as the starting file</span> updates it, and <span class="k">⬇ Save starting file</span> makes a copy to share with another device.</li>
+</ul>
+<p class="mu">On the PC (Chrome or Edge) you pick the folder in the normal Windows box. On iPhone/iPad, choose <b>Save to Files</b>. Game files move between devices with AirDrop or iCloud Drive.</p></section>
+
+<section><h2>Backups (important)</h2>
+<p>Each device keeps its own games. Clearing Safari's data or losing the device loses them, unless you have a backup.</p>
+<ul>
+<li><span class="k">Stats</span> → Backup &amp; export → <span class="k">⬇ Download backup</span>. Save it to Files or email it to yourself.</li>
+<li>If saving doesn't work, use <span class="k">📋 Copy as text</span> and paste it into a Note or an email.</li>
+<li>To move games to another device, or after a reset: <span class="k">📂 Restore from file</span> or <span class="k">Paste backup text</span>. Your old data is kept, so <span class="k">↩ Undo last restore</span> can put it back.</li>
+<li>The backup card turns red when a saved game hasn't been backed up.</li>
+</ul></section>
+
+<section><h2>Stats and spreadsheets</h2>
+<ul>
+<li><span class="k">Stats</span> ranks players by net winnings, by year. W-L counts games where a player won any money (prize, bounty or high hand).</li>
+<li>Tap a player for their history. Tap a game for full results.</li>
+<li><span class="k">⬇ Rankings CSV</span> and <span class="k">⬇ All game results CSV</span> open in Excel, Numbers or Google Sheets.</li>
+</ul></section>
+
+<section><h2>Putting it on your devices</h2>
+<p><b>PC</b>: double-click the <b>Poker Night</b> chip on your desktop. The dashboard opens with buttons for the app, TV mode and this guide.</p>
+<p><b>iPhone / iPad</b> (once per device, with Wi-Fi or a signal):</p>
+<ol>
+<li>Open <b>Safari</b> and go to <b>pokergame03.github.io/poker-night</b>, or scan the QR code on the PC dashboard with the Camera and tap the link.</li>
+<li>Tap the Share button (square with an up arrow) → <b>Add to Home Screen</b> → <b>Add</b>. The $10,000 chip appears on your Home Screen.</li>
+<li>From now on, open Poker Night from that chip. It works with no internet.</li>
+</ol>
+<p class="mu">Always open it from the chip, not from Safari: the chip keeps its own saved games. New versions arrive by themselves the next time you open it with a signal.</p></section>
+
+<section><h2>More than one device (sync)</h2>
+<p>Open the online app on each device while signed in to claude.ai. They share one game.</p>
+<ul>
+<li>One device is the <b>director</b> and makes all the changes. The others are <b>watching</b>: they show the same game live, with the game buttons turned off.</li>
+<li>The button at the top shows where you stand: <span class="k">🟢 Director</span>, <span class="k">🟡 Director · offline</span> (changes send when the signal returns), <span class="k">🔵 Watching</span>, or <span class="k">⚪ Watching · last update…</span></li>
+<li>To switch directors, tap that button on the other device → <span class="k">Take over as director</span> → Yes. The old director switches to watching.</li>
+<li>Alarms are on for the director and the TV, and off on watching phones. Change it per device from the same button.</li>
+<li>Saved games are kept in the cloud and appear on every device. Clear history is turned off while syncing.</li>
+</ul>
+<p class="mu">The PC's desktop shortcut runs its own copy and doesn't sync. To sync on the PC, use the online link on the dashboard.</p></section>
+
+<section><h2>If something looks wrong</h2>
+<ul>
+<li><b>No sound</b>: tap the screen once, check the ringer and volume, and use the test buttons.</li>
+<li><b>Places or chips look off</b>: Undo the wrong knockout and enter it again.</li>
+<li><b>Self-check</b>: the PC dashboard has a <b>Run self-check</b> button that tests the rules (about 40 checks) without touching your games.</li>
+<li><b>Games missing on a device</b>: restore your latest backup on that device.</li>
+</ul></section>
+
+</div>
+<footer>Poker Night Manager · guide for version 2 · October 2026</footer>
+</div></body></html>
